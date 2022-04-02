@@ -11,8 +11,16 @@
 
 if (window.top !== window.self) {
   window.addEventListener("load", () => {
+    const a = document.createElement("a");
     const button = document.createElement("button");
-    button.style = "position: fixed; top: 50px; left: 100px; background: white; color: black;";
+    const time = new Date().getTime();
+
+    a.id = "download";
+    a.download = `place_${time}.png`;
+    a.style = "position: absolute; top: 0; left: 0;";
+
+    button.style =
+      "position: fixed; top: 50px; left: 100px; background: white; color: black;";
     button.id = "tampermonkey-ss";
     button.innerHTML = "Download image";
     button.addEventListener("click", () => {
@@ -24,15 +32,18 @@ if (window.top !== window.self) {
           "div > mona-lisa-share-container > mona-lisa-camera > mona-lisa-canvas"
         )
         .shadowRoot.querySelector("div > canvas");
-      const image = new Image();
-      image.id = "pic";
-      image.src = canvas.toDataURL();
-      document.querySelector("body").appendChild(image);
-      document.querySelector("body #pic");
-      const w = window.open("");
-      w.document.write(image.outerHTML);
+      
+      // get canvas and replace with stream
+      const image = canvas
+        .toDataURL("image/png")
+        .replace("image/png", "image/octet-stream");
+      
+      // add image and download
+      a.setAttribute("href", image);
+      a.click();
     });
 
+    document.querySelector("body").appendChild(a);
     document.querySelector("body").appendChild(button);
   });
 }
