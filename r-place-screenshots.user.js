@@ -9,14 +9,20 @@
 // @grant        none
 // ==/UserScript==
 
+// yyyy-mm-dd_hh.ii.ss
+function getTimestamp () {
+  const pad = (n,s=2) => (`${new Array(s).fill(0)}${n}`).slice(-s);
+  const d = new Date();
+  
+  return `${pad(d.getFullYear(),4)}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}.${pad(d.getMinutes())}.${pad(d.getSeconds())}`;
+}
+
 if (window.top !== window.self) {
   window.addEventListener("load", () => {
     const a = document.createElement("a");
     const button = document.createElement("button");
-    const time = new Date().getTime();
 
     a.id = "download";
-    a.download = `place_${time}.png`;
     a.style = "position: absolute; top: 0; left: 0;";
 
     button.style = "position: absolute; top: var(--button-height); left: 100px; --button-height: 24px; --button-color-background: white; --button-border-width: 0px;";
@@ -38,6 +44,8 @@ if (window.top !== window.self) {
         .replace("image/png", "image/octet-stream");
 
       // add image and download
+      const time = getTimestamp();
+      a.download = `place_${time}.png`;
       a.setAttribute("href", image);
       a.click();
     });
