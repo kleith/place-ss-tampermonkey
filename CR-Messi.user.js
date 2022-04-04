@@ -20,7 +20,7 @@ if (window.top !== window.self) {
           (function () {
             const i = document.createElement("img");
             i.src =
-              "https://raw.githubusercontent.com/kleith/place-ss-tampermonkey/main/canvas_pt.png";
+              "https://raw.githubusercontent.com/kleith/place-ss-tampermonkey/main/canvas_pt2.png";
             i.style =
               "position: absolute;left: 0;top: 0px;image-rendering: pixelated;width: 2000px;height: 2000px";
             i.id = "mcss-overlay";
