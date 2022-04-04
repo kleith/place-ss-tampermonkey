@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Portugal Overlay
+// @name         CR - Messi Overlay
 // @namespace    http://tampermonkey.net/
 // @version      0.2
 // @description  Orgulho tuga!
@@ -8,6 +8,7 @@
 // @icon         https://i.pinimg.com/originals/bb/28/f0/bb28f08db88265208c7329474998d8a5.png
 // @grant        none
 // ==/UserScript==
+
 if (window.top !== window.self) {
   window.addEventListener(
     "load",
